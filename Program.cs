@@ -176,8 +176,8 @@ namespace Kumagai.Kafka.ProducerPerf
                         long elapsedTimeInMillisecond = s_timerProduce.ElapsedMilliseconds;
                         sw.WriteLine(elapsedTimeInMillisecond);
                         sw.Flush();
-
-                        string[] _output = {
+                        if(settings["verbose"] == "1"){
+                            string[] _output = {
                                             Convert.ToString(i),
                                             Convert.ToString(deliveryReport.TopicPartitionOffset.Partition),
                                             Convert.ToString(deliveryReport.TopicPartitionOffset.Offset),
@@ -186,7 +186,7 @@ namespace Kumagai.Kafka.ProducerPerf
                                             elapsedTimeInMillisecond.ToString(),
                                             Convert.ToString(deliveryReport.Message.Timestamp.UtcDateTime)
                                             };
-                        if(settings["verbose"] == "1"){
+                        
                             TerminalOutput(_output, outputFormat);
                         }
                         string _partition = Convert.ToString(deliveryReport.TopicPartitionOffset.Partition);
